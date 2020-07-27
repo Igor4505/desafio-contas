@@ -1,0 +1,116 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Desafio Conductor - @ViewData["Title"]</title>
+
+    <environment include="Development">
+        <link rel="stylesheet" href="~/lib/jquery-modal/jquery.modal.css" />
+        <link href="https://fonts.googleapis.com/css?family=Mukta+Mahee:200,400,600,700,800" rel="stylesheet" />
+        <link rel="stylesheet" href="~/css/styles.css" />
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="~/lib/jquery-modal/jquery.modal.css" />
+        <link href="https://fonts.googleapis.com/css?family=Mukta+Mahee:200,400,600,700,800" rel="stylesheet" />
+        <link rel="stylesheet" href="~/css/styles.min.css" asp-append-version="true" />
+    </environment>
+</head>
+<body id="@ViewData["idBody"]">
+    <div style="min-height: 100%; position: relative">
+        <nav id="Menu" style="top:0; bottom:0;">
+            <img class="logo" src="~/images/icone-desafio.png" />
+            <h2>Desafio Conductor</h2>
+            <hr>
+            <ul>
+                <li>
+                    <a asp-action="Index">
+                        <img class="icone" src="~/images/Menu/icone-home.png" />
+                        <h3>Início</h3>
+                    </a>
+                </li>
+                <li>
+                    <a asp-controller="Contas" asp-action="Index">
+                        <img class="icone" src="~/images/Menu/icone-contas.png" />
+                        <h3>Minhas Contas</h3>
+                    </a>
+                </li>
+                <li>
+                    <a asp-controller="Transacoes" asp-action="Index">
+                        <img class="icone" src="~/images/Menu/icone-transacoes.png" />
+                        <h3>Transações</h3>
+                    </a>
+                </li>
+                <li>
+                    <a asp-controller="Perfil" asp-action="Index">
+                        <img class="icone" src="~/images/Menu/icone-perfil.png" />
+                        <h3>Perfil</h3>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <section id="Conteudo">
+            <header id="Header">
+                <div style="width: 100%;">
+                    <h3>Painel de Controle - @ViewData["Title"]</h3>
+                    <div style="float: right;">
+                        <h3>Bem-vindo @ViewBag.Pessoa</h3>
+                        <button><p style="font-weight: 600">Sair</p></button>
+                    </div>
+                </div>
+            </header>
+            @RenderBody()
+
+        </section>
+        <environment include="Development">
+            <script src="~/lib/jquery/dist/jquery.js"></script>
+            <script src="~/lib/jquery-modal/jquery.modal.js"></script>
+            <script src="~/js/site.js" asp-append-version="true"></script>
+        </environment>
+        <environment exclude="Development">
+            <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
+                    asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                    asp-fallback-test="window.jQuery"
+                    crossorigin="anonymous"
+                    integrity="sha384-K+ctZQ+LL8q6tP7I94W+qzQsfRV2a+AfHIi9k8z8l9ggpc8X+Ytst4yBo/hH+8Fk">
+            </script>
+            <script src="~/lib/jquery-modal/jquery.modal.js"></script>
+            <script src="~/js/site.js" asp-append-version="true"></script>
+        </environment>
+        @if (TempData["alerta"] != null)
+        {
+            <script>
+                $(document).ready(function () {
+                    alerta();
+                });
+            </script>
+        }
+        @RenderSection("Scripts", required: false)
+        <div style="clear: both"></div>
+        <footer id="Footer">
+            <p>Desenvolvido por Igor Dantas</p>
+        </footer>
+    </div>
+</body>
+</html>
+
+<!-- Modal ERROR -->
+<div class="modal big" id="alerta" style="display: none; text-align: center;">
+    <div class="modal-header">
+        <h2>Alerta!</h2>
+    </div>
+    <div class="modal-body">
+        @if (TempData["Alerta"] != null)
+        {
+            <div class="alerta @TempData["Classe"]">
+                <div class="icone-alerta icone-@TempData["Classe"]">!</div>
+                <div style="padding: 0 2px 10px; margin-top: 12px"><h5>@Html.Raw(TempData["Mensagem"])</h5></div>
+            </div>
+        }
+    </div>
+
+    <div class="modal-footer">
+        <button type="button" class="fechar submit" onclick="$.modal.close();">Fechar</button>
+    </div>
+</div>
+

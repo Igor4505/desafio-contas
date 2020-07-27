@@ -1,0 +1,75 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Conductor.Desafio.Web</title>
+
+    <environment include="Development">
+        <link rel="stylesheet" href="~/lib/jquery-modal/jquery.modal.css" />
+        <link rel="stylesheet" href="~/css/login.css" />
+        <link href="https://fonts.googleapis.com/css?family=Mukta+Mahee:200,400,600,700,800" rel="stylesheet" />
+        <script src="~/js/site.js" asp-append-version="true"></script>
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+    </environment>
+</head>
+<body>
+    <div id="CorpoPagina">
+        <header id="Header">
+            <img src="~/images/icone-desafio-escuro.png" />
+        </header>
+        @RenderBody()
+        <footer id="Footer">
+            <p style="color:#333333">Desenvolvido por Igor Dantas</p>
+        </footer>
+    </div>
+
+    <environment include="Development">
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/jquery-modal/jquery.modal.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
+                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                asp-fallback-test="window.jQuery"
+                crossorigin="anonymous"
+                integrity="sha384-K+ctZQ+LL8q6tP7I94W+qzQsfRV2a+AfHIi9k8z8l9ggpc8X+Ytst4yBo/hH+8Fk">
+        </script>
+        <script src="~/lib/jquery-modal/jquery.modal.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+    </environment>
+    @if (TempData["alerta"] != null)
+    {
+        <script>
+            $(document).ready(function () {
+                alerta();
+            });
+        </script>
+    }
+    @RenderSection("Scripts", required: false)
+
+</body>
+</html>
+
+<!-- Modal ERROR -->
+<div class="modal big" id="alerta" style="display: none; text-align: center;">
+    <div class="modal-header">
+        <h2>Alerta!</h2>
+    </div>
+    <div class="modal-body">
+        @if (TempData["Alerta"] != null)
+        {
+            <div class="alerta @TempData["Classe"]">
+                <div class="icone-alerta icone-@TempData["Classe"]">!</div>
+                <div style="padding: 0 2px 10px; margin-top: 12px"><h5>@Html.Raw(TempData["Mensagem"])</h5></div>
+            </div>
+        }
+    </div>
+
+    <div class="modal-footer">
+        <button type="button" class="fechar submit" onclick="$.modal.close();">Fechar</button>
+    </div>
+</div>

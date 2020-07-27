@@ -1,0 +1,84 @@
+﻿@model Conductor.Desafio.Database.ViewModels.TransacoesViewModel;
+@using Conductor.Desafio.Core.Enums;
+@{
+    ViewData["Title"] = "Extrato Conta";
+    ViewData["idBody"] = "transacoes";
+}
+<div class="secoes">
+    <h4>Extrato da conta: @Model.Conta.Descricao</h4>
+    <p class="descricao">Visualizar extrato da conta</p>
+
+    @if (Model.Conta != null)
+    {
+        string ativo = Model.Conta.FlagAtivo == true ? "Ativo" : "Desativado";
+        <div style="width:100%; background-image: url('/images/Menu/icone-contas.png'); background-size:10%; background-position: right" class="conta">
+            <h4 style="text-align: center">@Model.Conta.Descricao</h4>
+            <h5><b>Tipo:</b> @Model.Conta.Tipo </h5>
+            <h5><b>Saldo:</b> R$@Model.Conta.Saldo</h5>
+            <h5><b>Limite de Saque:</b> R$@Model.Conta.LimiteSaqueDiario</h5>
+            <h5><b>Status:</b> @ativo</h5>
+        </div>
+    }
+    else
+    {
+        <h4 style="color:#303030">Conta Inexistente</h4>
+    }
+</div>
+<hr/>
+<div class="secoes">
+    <h4>Filtrar Transações</h4>
+    <form method="get">
+        <table style="width: 100%;">
+            <tr>
+                <td style="width:33%"><label>Por Tipo:</label></td>
+                <td style="width:33%"><label>Data Mínima:</label></td>
+                <td style="width:33%"><label>Data Máxima:</label></td>
+            </tr>
+            <tr>
+                <td>
+                    <select asp-for="Filtros.PorTipo">
+                        <option value="">Todos os tipos</option>
+                        <option value="@TipoTransacaoEnum.Deposito">Depósito</option>
+                        <option value="@TipoTransacaoEnum.Saque">Saque</option>
+                    </select>
+                </td>
+                <td>
+                    <input asp-for="Filtros.DataMinima" type="date" />
+                </td>
+                <td>
+                    <input asp-for="Filtros.DataMaxima" type="date" />
+                </td>
+            </tr>
+        </table>
+        <button type="submit" class="submit">Filtrar</button>
+        <table style="width: 100%; border-collapse: collapse;">
+            <tr>
+                <td style="width:15%"><label>Descrição:</label></td>
+                <td><label>Conta:</label></td>
+                <td><label>Tipo:</label></td>
+                <td><label>Data:</label></td>
+                <td style="width: 10%;"><label>Acoes:</label></td>
+            </tr>
+            @if (Model.Transacoes.Count > 0)
+            {
+                foreach (var transacao in Model.Transacoes)
+                {
+                    <tr style="">
+                        <td><p>@transacao.Descricao</p></td>
+                        <td><p>@transacao.ContaDescricao</p></td>
+                        <td><p>@transacao.TipoTransacao</p></td>
+                        <td><p>@(transacao.DataTransacao.ToShortDateString())</p></td>
+                        <td><button style="background-color: indianred">Deletar</button></td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="4"> <h5 style="text-align:center">Nenhuma transação encontrada</h5></td>
+                </tr>
+            }
+
+        </table>
+    </form>
+</div>

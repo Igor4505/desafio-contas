@@ -1,0 +1,224 @@
+﻿* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+}
+
+h2 {
+    font-family: 'Mukta Mahee', sans-serif;
+    font-size: 20pt;
+}
+
+h3 {
+    font-family: 'Mukta Mahee', sans-serif;
+    font-size: 16pt;
+}
+
+h4 {
+    font-family: 'Mukta Mahee', sans-serif;
+    font-size: 14pt;
+}
+
+h5 {
+    font-family: 'Mukta Mahee', sans-serif;
+    font-size: 15px;
+}
+
+label {
+    font-family: 'Mukta Mahee', sans-serif;
+}
+
+
+p, a {
+    font-family: 'Mukta Mahee', sans-serif;
+    font-size: 10pt;
+}
+
+.criarConta:hover {
+    font-weight: 600;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.field-validation-valid {
+    display: block;
+}
+
+.error {
+    color: red;
+}
+
+#CorpoPagina {
+    min-height: 100%;
+    width: 100%;
+    height: auto;
+    background-color: #E6E6E6;
+    position: relative;
+}
+
+#Header {
+    padding: 25px 0;
+    position: relative;
+    width: 100%;
+    text-align: center;
+}
+
+/* CAIXA DE ALERTA */
+
+div.alerta {
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
+    min-height: 40px;
+    display: table;
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+div.icone-alerta {
+    font-weight: 400;
+    display: table-cell;
+    height: 100%;
+    vertical-align: middle;
+    width: 40px;
+    font-size: 30px;
+    font-family: 'Mukta Mahee', sans-serif;
+    color: white;
+}
+
+div.icone-atencao {
+    background-color: #BFB831;
+}
+
+div.icone-sucesso {
+    background-color: #37A849;
+}
+
+.atencao {
+    font-weight: 100;
+    background-color: #E5E1C1;
+    border: solid #BFB831 1px;
+    color: #75712E;
+}
+
+.sucesso {
+    font-weight: 100;
+    background-color: #DFEFDC;
+    border: solid #37A849 1px;
+    color: #37A849;
+}
+
+
+#SectionCadastro {
+    border-radius: 5px;
+    width: 40%;
+    margin: 0 auto;
+    background-color: white;
+    text-align: center;
+    box-shadow: #A0A0A0 2px 2px 3px;
+}
+
+.loginHeader {
+    border-radius: 5px 5px 0 0;
+    background-color: #4B8FA8;
+    padding: 3px;
+}
+
+#SectionCadastro h3 {
+    color: white;
+    font-weight: 200
+}
+
+#SectionCadastro h4 {
+    color: #333333;
+    font-weight: 400;
+}
+
+#SectionCadastro hr {
+    height: 3px;
+    width: 40%;
+    margin: 0 auto;
+    background-color: #1D2228;
+}
+
+.SetupForm {
+    text-align: left;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.SetupForm label {
+    font-size: 11pt;
+    color: #333333;
+    font-weight: 800;
+}
+
+.SetupForm input[type=text], input[type=email], input[type=date], input[type=password] {
+    padding: 0 5px;
+    display: block;
+    width: 100%;
+    height: 35px;
+    margin-bottom: 5px;
+    border: solid #666666 1px;
+}
+
+.SetupForm span {
+    font-family: 'Mukta Mahee', sans-serif;
+    font-size: 10pt;
+}
+
+.SetupForm input:focus {
+    outline: none !important;
+    box-shadow: 0 0 10px #719ECE;
+}
+
+.SetupForm button.submit {
+    display: block;
+    height: 36px;
+    background-color: #384250;
+    padding: 0 20px;
+    color: white;
+    border: none;
+    border-radius: 18px;
+    width: 200px;
+    margin: 20px auto 0;
+}
+
+#Footer {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    padding: 5px;
+    text-align: center;
+}
+
+.modal h3{
+    font-weight: 400;
+}
+
+.modal button {
+    width: 100px;
+    height: 30px;
+    cursor: pointer;
+    color: white;
+    border: none;
+    border-radius: 15px;
+}
+
+.modal .cadastrar {
+    background-color: #384250;
+    float: right;
+}
+
+.modal .cadastrar:hover{
+    background-color: #3C5060;
+}
+
+.fechar {
+    background-color: #6D6E71;
+}
+

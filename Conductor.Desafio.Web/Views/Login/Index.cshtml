@@ -1,0 +1,83 @@
+﻿@model Conductor.Desafio.Database.ViewModels.PessoaViewModel;
+@{
+    ViewData["Title"] = "Index";
+    Layout = "_LoginLayout";
+}
+<section id="SectionCadastro">
+    <div class="loginHeader">
+        <h3>Desafio Conductor</h3>
+    </div>
+    <div style="text-align: center; padding: 0 20px 10px">
+        <h4><b>Login</b></h4>
+        <form asp-controller="Login" asp-action="RealizarLogin" class="SetupForm" method="post">
+            <label asp-for="LoginDTO.EmailLogin">E-mail</label>
+            <span class="error" asp-validation-for="LoginDTO.EmailLogin"></span>
+            <input asp-for="LoginDTO.EmailLogin" placeholder="E-Mail" />
+
+            <label asp-for="LoginDTO.SenhaLogin">Senha</label>
+            <span class="error" asp-validation-for="LoginDTO.SenhaLogin"></span>
+            <input asp-for="LoginDTO.SenhaLogin" type="password" placeholder="Senha" />
+            <button class="submit">Entrar</button>
+        </form>
+        <br />
+        <div style="text-align:center">
+            <a class="criarConta" onclick="modalCadastro();">Criar uma conta</a>
+        </div>
+    </div>
+</section>
+
+<!--MODAL DE ADICIONAR-->
+<div class="modal big" id="modalCadastro" style="display: none">
+    <div class="modal-header">
+        <h3>Adicionar Usuário</h3>
+    </div>
+    <form class="SetupForm" asp-controller="Login" asp-action="AddUsuario" method="post">
+        <div class="modal-body">
+            <label asp-for="Pessoa.Nome">Nome:</label>
+            <span class="error" asp-validation-for="Pessoa.Nome"></span>
+            <input asp-for="Pessoa.Nome" type="text" placeholder="Nome" />
+
+            <label asp-for="Pessoa.Sobrenome">Sobrenome:</label>
+            <span class="error" asp-validation-for="Pessoa.Sobrenome"></span>
+            <input asp-for="Pessoa.Sobrenome" type="text" placeholder="Sobrenome" />
+
+            <label asp-for="Pessoa.Cpf">CPF:</label>
+            <span class="error" asp-validation-for="Pessoa.Cpf"></span>
+            <input class="cpf" asp-for="Pessoa.Cpf" type="text" placeholder="CPF" />
+
+            <label asp-for="Pessoa.Email">E-mail:</label>
+            <span class="error" asp-validation-for="Pessoa.Email"></span>
+            <input asp-for="Pessoa.Email" type="email" placeholder="E-mail" />
+
+            <label asp-for="Pessoa.Senha">Senha:</label>
+            <span class="error" asp-validation-for="Pessoa.Senha"></span>
+            <input data-val-required="Este campo é obrigatório." asp-for="Pessoa.Senha" type="password" placeholder="Senha" required />
+
+            <label asp-for="Pessoa.ConfSenha">Repita a Senha:</label>
+            <span class="error" asp-validation-for="Pessoa.ConfSenha"></span>
+            <input data-val-required="Este campo é obrigatório." asp-for="Pessoa.ConfSenha" type="password" placeholder="Repita a senha." required />
+
+            <label asp-for="Pessoa.Nascimento">Data de Nascimento:</label>
+            <span class="error" asp-validation-for="Pessoa.Nascimento"></span>
+            <input class="date" asp-for="Pessoa.Nascimento" type="date" placeholder="Nome" />
+
+
+            <label asp-for="Pessoa.Genero">Gênero</label>
+            <input asp-for="Pessoa.Genero" type="radio" value="@Conductor.Desafio.Core.Enums.GeneroEnum.masculino" />
+            <span>Masculino</span>
+            <input asp-for="Pessoa.Genero" type="radio" value="@Conductor.Desafio.Core.Enums.GeneroEnum.feminino" />
+            <span>Feminino</span>
+        </div>
+        <div class="modal-footer">
+            <button onclick="$.modal.close();" type="button" class="fechar">Fechar</button>
+            <button type="submit" class="cadastrar">Cadastrar</button>
+        </div>
+    </form>
+</div>
+
+
+
+@section Scripts{
+    @Html.Partial("../Shared/_ValidationScriptsPartial.cshtml")
+}
+

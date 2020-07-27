@@ -1,0 +1,196 @@
+﻿@model Conductor.Desafio.Database.ViewModels.ContaViewModel;
+@using Conductor.Desafio.Core.Enums;
+@{
+    ViewData["Title"] = "Minhas Contas";
+    ViewData["idBody"] = "Contas";
+}
+
+<div class="secoes">
+    <h4>Menu</h4>
+    <p class="descricao">Gerêncie e crie as suas contas.</p>
+    <table class="acoes">
+        <tr>
+            <td>
+                <a class="ativo" onclick="addConta();">
+                    <img src="~/images/Contas/add-conta.png" />
+                    <p>Adicionar Conta</p>
+                </a>
+            </td>
+            <td><a><img src="~/images/vazio.png" /></a></td>
+            <td><a><img src="~/images/vazio.png" /></a></td>
+            <td><a><img src="~/images/vazio.png" /></a></td>
+            <td><a><img src="~/images/vazio.png" /></a></td>
+            <td><a><img src="~/images/vazio.png" /></a></td>
+            <td><a><img src="~/images/vazio.png" /></a></td>
+            <td><a><img src="~/images/vazio.png" /></a></td>
+            <td><a><img src="~/images/vazio.png" /></a></td>
+        </tr>
+    </table>
+</div>
+
+<hr />
+
+<div class="secoes">
+    <h4>Minhas Contas</h4>
+    @if (Model.Contas != null && Model.Contas.Count() > 0)
+    {
+
+        foreach (var conta in Model.Contas)
+        {
+            string ativo = conta.FlagAtivo == true ? "Ativo" : "Desativado";
+            <div style="background-image: url('/images/Menu/icone-contas.png')" class="conta">
+                <h4 style="text-align: center">@conta.Descricao</h4>
+                <h5><b>Tipo:</b> @conta.Tipo </h5>
+                <h5><b>Saldo:</b> R$@conta.Saldo</h5>
+                <h5><b>Limite de Saque:</b> R$@conta.LimiteSaqueDiario</h5>
+                <h5><b>Status:</b> @ativo</h5>
+                <div class="acoes">
+                    <a class="extrato" onclick="editConta(@conta.Id)">Editar</a>
+                    <a class="extrato" onclick="desativarConta(@conta.Id)">Desativar</a>
+                    <a class="extrato" onclick="delConta(@conta.Id)">Excluir</a>
+                    <a class="extrato" href="transacoes/extrato/@conta.Id">Extrato</a>
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <h4 style="text-align: center;">Nenhuma conta cadastrada</h4>
+    }
+</div>
+<!--MODAL DE ADICIONAR-->
+<div class="modal big" id="addConta" style="display: none">
+    <div class="modal-header">
+        <h3>Adicionar Conta</h3>
+    </div>
+    <form class="form" asp-controller="Contas" asp-action="AddConta" method="post">
+        <div class="modal-body">
+            <input type="hidden" asp-for="Conta.IdPessoa" value="@ViewBag.Id" />
+
+            <label asp-for="Conta.Tipo">Tipo da Conta:</label>
+            <span class="error" asp-validation-for="Conta.Tipo"></span>
+            <select asp-for="Conta.Tipo">
+                <option value="@Conductor.Desafio.Core.Enums.TipoContaEnum.Corrente">Conta Corrente</option>
+                <option value="@Conductor.Desafio.Core.Enums.TipoContaEnum.Polpanca">Polpança</option>
+                <option value="@Conductor.Desafio.Core.Enums.TipoContaEnum.Salario">Conta Salário</option>
+                <option value="@Conductor.Desafio.Core.Enums.TipoContaEnum.Cofre">Cofre</option>
+            </select>
+
+            <label asp-for="Conta.Descricao">Descrição:</label>
+            <span class="error" asp-validation-for="Conta.Descricao"></span>
+            <input asp-for="Conta.Descricao" type="text" placeholder="Ex.: Conta do Banco do Brasil" />
+
+            <label asp-for="Conta.LimiteSaqueDiario">Limite de Saque Diário:</label>
+            <span class="error" asp-validation-for="Conta.LimiteSaqueDiario"></span>
+            <input asp-for="Conta.LimiteSaqueDiario" type="number" placeholder="Ex.: 800" />
+        </div>
+        <div class="modal-footer">
+            <button onclick="$.modal.close();" type="button" class="fechar">Fechar</button>
+            <button type="submit" class="cadastrar">Cadastrar</button>
+        </div>
+    </form>
+</div>
+
+<!--MODAL DE EXCLUIR-->
+<div class="modal big" id="delConta" style="display: none">
+    <div class="modal-header">
+        <h3>Excluir Conta</h3>
+    </div>
+    <form id="formDelConta" class="SetupForm" method="post">
+        <div class="modal-body">
+            <h3>Tem certeza que deseja excluir esta conta?</h3>
+        </div>
+        <div class="modal-footer">
+            <button onclick="$.modal.close();" type="button" class="fechar">Fechar</button>
+            <button type="submit" class="cadastrar">Excluir</button>
+        </div>
+    </form>
+</div>
+
+<!--MODAL DE DESATIVAR-->
+<div class="modal big" id="desativarConta" style="display: none">
+    <div class="modal-header">
+        <h3>Desativar Conta</h3>
+    </div>
+    <form id="formDesConta" class="SetupForm" method="post">
+        <div class="modal-body">
+            <h3>Tem certeza que deseja desativar esta conta?</h3>
+        </div>
+        <div class="modal-footer">
+            <button onclick="$.modal.close();" type="button" class="fechar">Fechar</button>
+            <button type="submit" class="cadastrar">Excluir</button>
+        </div>
+    </form>
+</div>
+
+<!--MODAL DE EDITAR-->
+<div class="modal big" id="editConta" style="display: none">
+    <div class="modal-header">
+        <h3>Editar Conta</h3>
+    </div>
+    <form id="EditForm" class="form" asp-controller="Contas" asp-action="EditarConta" method="post">
+        <div class="modal-body">
+            <input type="hidden" asp-for="ContaEdit.Id" />
+            <label asp-for="ContaEdit.Tipo">Tipo da Conta:</label>
+            <span class="error" asp-validation-for="ContaEdit.Tipo"></span>
+            <select name="tipo" asp-for="ContaEdit.Tipo">
+                <option value="@Conductor.Desafio.Core.Enums.TipoContaEnum.Corrente">Conta Corrente</option>
+                <option value="@Conductor.Desafio.Core.Enums.TipoContaEnum.Polpanca">Polpança</option>
+                <option value="@Conductor.Desafio.Core.Enums.TipoContaEnum.Salario">Conta Salário</option>
+                <option value="@Conductor.Desafio.Core.Enums.TipoContaEnum.Cofre">Cofre</option>
+            </select>
+
+            <label asp-for="Conta.Descricao">Descrição:</label>
+            <span class="error" asp-validation-for="ContaEdit.Descricao"></span>
+            <input name="descricao" asp-for="ContaEdit.Descricao" type="text" placeholder="Ex.: Conta do Banco do Brasil" />
+
+            <label asp-for="ContaEdit.LimiteSaqueDiario">Limite de Saque Diário:</label>
+            <span class="error" asp-validation-for="ContaEdit.LimiteSaqueDiario"></span>
+            <input name="limite" asp-for="ContaEdit.LimiteSaqueDiario" type="number" placeholder="Ex.: 800" />
+        </div>
+        <div class="modal-footer">
+            <button onclick="$.modal.close();" type="button" class="fechar">Fechar</button>
+            <button type="submit" class="cadastrar">Cadastrar</button>
+        </div>
+    </form>
+</div>
+
+@section Scripts{
+    @Html.Partial("../Shared/_ValidationScriptsPartial.cshtml")
+}
+
+<script>
+//MODAL EDITAR CONTA
+function editConta(id) {
+    var url = "http://localhost:60072/api/Contas/" + id;
+    $.getJSON(url, function (dados) {
+    $("#EditForm").attr('action', 'Contas/EditarConta/'+id)
+        if (dados != null) {
+            switch (dados.tipo) {
+                case 0:
+                    $("#ContaEdit_Tipo").val("@TipoContaEnum.Corrente");
+                    break;
+                case 1:
+                    $("#ContaEdit_Tipo").val("@TipoContaEnum.Polpanca");
+                    break;
+                case 2:
+                    $("#ContaEdit_Tipo").val("@TipoContaEnum.Salario");
+                    break;
+                case 3:
+                    $("#ContaEdit_Tipo").val("@TipoContaEnum.Cofre");
+                    break;
+                default:
+            }
+            $("#ContaEdit_Id").val(dados.id);
+            $("#ContaEdit_Descricao").val(dados.descricao);
+            $("#ContaEdit_LimiteSaqueDiario").val(dados.limiteSaqueDiario);
+        }
+    });
+
+    $('#editConta').modal({
+        fadeDuration: 130,
+        showClose: false
+    });
+}
+
+</script>

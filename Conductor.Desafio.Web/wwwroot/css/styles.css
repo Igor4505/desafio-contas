@@ -1,0 +1,405 @@
+﻿* { 
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body { height: 100% }
+
+a {
+    font-family: 'Mukta Mahee', sans-serif;
+    text-decoration: none;
+    color: black;
+}
+
+h2 {
+    font-family: 'Mukta Mahee', sans-serif;
+    font-size: 22px;
+}
+
+h3 {
+    font-family: 'Mukta Mahee', sans-serif;
+    font-size: 17px;
+}
+
+h4 {
+    font-family: 'Mukta Mahee', sans-serif;
+    font-size: 16px;
+}
+
+h5 {
+    font-family: 'Mukta Mahee', sans-serif;
+    font-size: 14px;
+}
+
+p {
+    font-family: 'Mukta Mahee', sans-serif;
+    font-size: 15px;
+}
+
+
+
+#Menu {
+    position: absolute;
+    padding-top: 20px;
+    background-color: #2D2D35;
+    box-shadow: rgba(0,0,0,.5) 2px 0 2px;
+    min-height: 100%;
+    width: 18%;
+    text-align: center;
+    top:0;
+    bottom: 0;
+}
+
+#Menu img.logo{
+    width: 50%;
+}
+
+#Menu h2, h3{
+    color: white;
+    font-weight: 200;
+}
+
+#Menu h3{
+    margin-left: 10px;
+    display: inline-block;
+}
+
+#Menu hr{
+    color: white;
+    width: 90%;
+    margin: 5px auto;
+}
+
+#Menu ul{
+    text-align: left;
+}
+
+#Menu ul li a{
+    display: flex;
+    box-sizing: border-box;
+    align-items: center;
+    padding: 5px 15px;
+    height: 50px;
+    width: 100%;
+    transition: background-color 0.1s, border-left 0.1s;
+    cursor: pointer;
+}
+
+#Menu ul li a:hover{
+    border-left: solid white 3px;
+    background-color: #3F3F47;
+}
+
+img.icone{
+    height: 100%;
+}
+
+#Conteudo {
+    position: relative;
+    float: right;
+    height: 100%;
+    width: 82%;
+    padding: 0 15px;
+}
+
+#Conteudo hr{
+    background-color: lightgrey;
+    border: none;
+    height: 1px;
+}
+
+tr{
+    border-bottom: solid lightgray 1px;
+}
+
+td{
+    padding: 5px 0;
+}
+
+#Conteudo div.conta{
+    box-shadow: #A0A0A0 2px 2px 3px;
+    border-radius: 5px;
+    position: relative;
+    display: inline-block;
+    background-color: #E6E6E6;
+    width: 32.1%;
+    margin: 5px;
+    border-left: solid #4B8FA8 6px;
+    padding: 10px 20px;
+    background-repeat: no-repeat;
+    background-size: 35%;
+    background-position-y: bottom;
+}
+
+div.conta h5{
+    font-weight: 400;
+    z-index: 10;
+}
+
+div.conta div.acoes{
+    width: 145px;
+    position: absolute;
+    right: 0;
+    bottom: 10px;
+    right: 10px;
+}
+
+div.acoes a.extrato {
+    display: inline-block;
+    margin-top: 5px;
+    width: 70px;
+    font-size: 11px;
+    cursor: pointer;
+    text-align: center;
+    padding: 3px 0;
+    color: white;
+    border: none;
+    border-radius: 15px;
+    background-color: #384250;
+}
+
+.secoes{
+    width: 100%;
+    padding: 20px;
+}
+
+.secoes  h4{
+    color: #303030;
+}
+.secoes p.descricao{
+    margin-top:-5px;
+    margin-bottom: 5px;
+    color: gray;
+}
+
+/* CAIXA DE ALERTA */
+
+div.alerta {
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
+    min-height: 40px;
+    display: table;
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+div.icone-alerta {
+    font-weight: 400;
+    display: table-cell;
+    height: 100%;
+    vertical-align: middle;
+    width: 40px;
+    font-size: 30px;
+    font-family: 'Mukta Mahee', sans-serif;
+    color: white;
+}
+
+div.icone-atencao {
+    background-color: #BFB831;
+}
+
+div.icone-sucesso {
+    background-color: #37A849;
+}
+
+.atencao {
+    font-weight: 100;
+    background-color: #E5E1C1;
+    border: solid #BFB831 1px;
+    color: #75712E;
+}
+
+.sucesso {
+    font-weight: 100;
+    background-color: #DFEFDC;
+    border: solid #37A849 1px;
+    color: #37A849;
+}
+
+/*=======ACOES========*/
+
+table.acoes {
+    border-spacing: 20px 0px;
+    text-align: center;
+    width: calc(100% + 40px);
+    margin-bottom: 10px;
+    margin-left: -20px;
+    margin-right: -20px;
+}
+
+table.acoes td {
+    width: 10%;
+}
+
+table.acoes a {
+    display: block;
+    text-decoration: none;
+    padding: 10px;
+    border-radius: 20px;
+    width: 100%;
+    background-color: #E6E7E8;
+    box-shadow: 0 0 5px rgba(0,0,0,.5);
+}
+
+table.acoes a.ativo {
+    cursor: pointer;
+    position: relative;
+    background-color: #387882;
+    transition: background-color .1s linear;
+}
+
+table.acoes a.ativo:hover {
+    background-color: #4D9299;
+}
+
+table.acoes a.atalho {
+    cursor: pointer;
+    position: relative;
+    background-color: #933844;
+    transition: background-color .1s linear;
+}
+
+table.acoes a.atalho:hover {
+    background-color: #A85160;
+}
+
+table.acoes a p {
+    text-align: center;
+    position: absolute;
+    right: 0;
+    left: 0;
+    bottom: 3px;
+    font-family: 'Mukta Mahee', sans-serif;
+    font-weight: 100;
+    color: white;
+    font-size: 11px;
+}
+
+table.acoes a img {
+    width: 100%;
+}
+
+/*====================*/
+
+#Header {
+    height: 50px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    height: 50px;
+    border-bottom: solid #303030 1px;
+}
+
+#Header h3{
+    display: inline-block;
+    color: #303030;
+    font-weight: 600;
+}
+#Header button{
+    height: 30px;
+    border: solid #303030 1px;
+    width: 75px;
+    background-color: white;
+    border-radius: 15px;
+    margin: 0 10px;
+    cursor: pointer;
+    transition: background-color, 0.2s
+}
+
+#Header button:hover{
+    background-color:#D6D6D6;
+}
+
+#Footer{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 82%;
+    text-align: center;
+}
+
+#Footer p{
+    color: #303030;
+    padding-bottom: 5px;
+}
+
+
+
+/*MODAL*/
+.modal h3{
+    font-weight: 400;
+    color: #303030;
+}
+
+.modal button, td button {
+    width: 100px;
+    height: 30px;
+    cursor: pointer;
+    color: white;
+    border: none;
+    border-radius: 15px;
+}
+
+.modal .cadastrar {
+    background-color: #384250;
+    float: right;
+}
+
+.modal .cadastrar:hover{
+    background-color: #3C5060;
+}
+
+.fechar {
+    background-color: #6D6E71;
+}
+
+/*FORMULARIOS*/
+.form {
+    text-align: left;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.error{
+    color: red;
+}
+
+label {
+    font-family: 'Mukta Mahee', sans-serif;
+    font-size: 11pt;
+    color: #333333;
+    font-weight: 800;
+}
+
+.form input[type=text], input[type=email], input[type=date], input[type=password],select, input[type=number] {
+    padding: 0 5px;
+    display: block;
+    width: 100%;
+    height: 35px;
+    margin-bottom: 5px;
+    border: solid #666666 1px;
+}
+
+.form span {
+    font-family: 'Mukta Mahee', sans-serif;
+    font-size: 10pt;
+}
+
+.form input:focus {
+    outline: none !important;
+    box-shadow: 0 0 10px #719ECE;
+}
+
+.submit {
+    display: block;
+    height: 36px;
+    background-color: #384250;
+    padding: 0 20px;
+    color: white;
+    border: none;
+    border-radius: 18px;
+    width: 200px;
+    margin: 20px auto 0;
+}

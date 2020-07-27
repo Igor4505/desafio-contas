@@ -1,0 +1,56 @@
+﻿<Page
+    x:Class="Conductor.Desafio.Uwp.Pessoas"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Conductor.Desafio.Uwp"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <StackPanel>
+        <TextBlock Text="Todas as Pessoas cadastradas:" />
+        <TextBlock Text="VERBO: GET - PATH: http://localhost:60072/api/Pessoas" />
+        <Button Click="Button_Click">Carregar Pessoas</Button>
+        <ListView ItemsSource="{Binding Pessoas}" HorizontalAlignment="Stretch">
+            <ListView.Header>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50"/>
+                        <ColumnDefinition Width="150"/>
+                        <ColumnDefinition Width="150"/>
+                        <ColumnDefinition Width="250"/>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="100"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock FontWeight="Bold" Grid.Column="0" Text="Id"/>
+                    <TextBlock FontWeight="Bold" Grid.Column="1" Text="Nome"/>
+                    <TextBlock FontWeight="Bold" Grid.Column="2" Text="CPF"/>
+                    <TextBlock FontWeight="Bold" Grid.Column="3" Text="Email"/>
+                    <TextBlock FontWeight="Bold" Grid.Column="4" Text="Idade"/>
+                    <TextBlock FontWeight="Bold" Grid.Column="5" Text="Gênero"/>
+                </Grid>
+            </ListView.Header>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="50"/>
+                                <ColumnDefinition Width="150"/>
+                                <ColumnDefinition Width="150"/>
+                                <ColumnDefinition Width="250"/>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="100"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" Text="{Binding Id}"/>
+                            <TextBlock Grid.Column="1" Text="{Binding NomeCompleto}"/>
+                            <TextBlock Grid.Column="2" Text="{Binding Cpf}"/>
+                            <TextBlock Grid.Column="3" Text="{Binding Email}"/>
+                            <TextBlock Grid.Column="4" Text="{Binding Idade}"/>
+                            <TextBlock Grid.Column="5" Text="{Binding Genero}"/>
+                        </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackPanel>
+</Page>
